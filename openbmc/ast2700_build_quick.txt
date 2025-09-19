@@ -1,0 +1,81 @@
+git clone https://github.com/openbmc/openbmc.git ./openbmc_ast2700
+cd  ./openbmc_ast2700
+//git checkout master
+
+source ./setup | grep -i ast
+evb-ast2500             nvl32-obmc              vegman-sx20
+evb-ast2600             olympus-nuvoton         ventura
+
+~~~ref~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. 進到 Gerrit 網站
+以 OpenBMC 的 Gerrit 為例：
+ https://gerrit.openbmc.org
+
+2.找到你要的 Change
+搜尋 Change-Id 或者 patch 標題。
+打開某個 change review 頁面（例如 73642）。
+
+3.查看 Download 按鈕
+在 Change 頁面右上角會有個 Download 按鈕，下拉後會看到像這樣的選項：
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/42/73642/57 && git cherry-pick FETCH_HEAD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//How to patch
+
+# 73642: meta-aspeed: Add ast2700 A1 support | https://gerrit.openbmc.org/c/openbmc/openbmc/+/73642 
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/42/73642/57 && git cherry-pick FETCH_HEAD
+
+#73641: meta-phosphor: Update image_types_phosphor.bbclass for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/73641
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/41/73641/32 && git cherry-pick FETCH_HEAD
+
+#80820: meta-evb: Add support for AST2700 EVB | https://gerrit.openbmc.org/c/openbmc/openbmc/+/80820
+# meta-evb: Add support for AST2700 EVB (eMMC & UFS) <== after patch this, display evb-ast2700 in setup 
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/20/80820/16 && git cherry-pick FETCH_HEAD
+
+//after patch would support ast2700 (evb-ast2700,evb-ast2700-emmc,evb-ast2700-ufs)
+ source setup | grep -i ast
+evb-ast2500             nf5280m7                vegman-rx20
+evb-ast2600             nicole                  vegman-sx20
+evb-ast2700             nvl32-obmc              ventura
+evb-ast2700-emmc        olympus-nuvoton         witherspoon
+evb-ast2700-ufs         p10bmc                  witherspoon-tacoma
+
+#75304: aspeed: ufs support | https://gerrit.openbmc.org/c/openbmc/openbmc/+/75304
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/04/75304/14 && git cherry-pick FETCH_HEAD
+
+#81057: meta-aspeed: Add u-boot-aspeed-sdk_2023.10 for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/81057
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/57/81057/12 && git cherry-pick FETCH_HEAD
+
+#81058: meta-aspeed: Add bootmcu-spl support for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/81058
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/58/81058/13 && git cherry-pick FETCH_HEAD
+
+#82105: meta-aspeed: Add fmc-images for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/82105
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/05/82105/5 && git cherry-pick FETCH_HEAD
+
+#79646: meta-aspeed:ast2700: use ASPEED Linux kernel | https://gerrit.openbmc.org/c/openbmc/openbmc/+/79646
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/46/79646/31 && git cherry-pick FETCH_HEAD
+
+//#82382: meta-phosphor:libtinyxml2: disable buildpaths warning | https://gerrit.openbmc.org/c/openbmc/openbmc/+/82382
+//git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/82/82382/4 && git cherry-pick FETCH_HEAD
+
+#81059: meta-aspeed: Add fmc-imgtool for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/81059
+git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/59/81059/12 && git cherry-pick FETCH_HEAD
+
+//before build
+加入 deadsnakes PPA					
+sudo apt update					
+sudo apt install software-properties-common -y					
+sudo add-apt-repository ppa:deadsnakes/ppa					
+sudo apt update					
+					
+安裝你要的 Python 版本（例如 3.11）：					
+sudo apt install python3.11 python3.11-venv python3.11-dev -y					
+					
+建立虛擬環境，並在其中執行 devrool / bitbake					
+python3.11 -m venv /home/callan/data2/ventura/python3.11   <== first time					
+source /home/callan/data2/ventura/python3.11/bin/activate     <== always use					
+python --version  # 確認是 3.11
+
+//build
+source /home/callan/data2/ventura/python3.11/bin/activate
+source setup evb-ast2700
+bitbake obmc-phosphor-image
