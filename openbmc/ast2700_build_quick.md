@@ -1,3 +1,6 @@
+﻿## Patch AST2700 in LF OpenBMC, just for reference
+**Download source**
+``` 
 git clone https://github.com/openbmc/openbmc.git ./openbmc_ast2700
 cd  ./openbmc_ast2700
 //git checkout master
@@ -5,21 +8,25 @@ cd  ./openbmc_ast2700
 source ./setup | grep -i ast
 evb-ast2500             nvl32-obmc              vegman-sx20
 evb-ast2600             olympus-nuvoton         ventura
-
-~~~ref~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. 進到 Gerrit 網站
-以 OpenBMC 的 Gerrit 為例：
+```
+---
+**Check patch**
+```
+1.Go to Gerrit
+e.g. OpenBMC's Gerrit：
  https://gerrit.openbmc.org
 
-2.找到你要的 Change
-搜尋 Change-Id 或者 patch 標題。
-打開某個 change review 頁面（例如 73642）。
+2.Find the Change
+Search Change-Id or patch Title。
+open change review page（e.g. 73642）。
 
-3.查看 Download 按鈕
-在 Change 頁面右上角會有個 Download 按鈕，下拉後會看到像這樣的選項：
+3.Download botton
+There will be a Download button in the upper right corner of the page. When you pull it down, you will see options like this: 
 git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/42/73642/57 && git cherry-pick FETCH_HEAD
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//How to patch
+```
+---
+**How to patch**
+```
 
 # 73642: meta-aspeed: Add ast2700 A1 support | https://gerrit.openbmc.org/c/openbmc/openbmc/+/73642 
 git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/42/73642/57 && git cherry-pick FETCH_HEAD
@@ -59,23 +66,34 @@ git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/46/79646/31 &&
 
 #81059: meta-aspeed: Add fmc-imgtool for AST2700 | https://gerrit.openbmc.org/c/openbmc/openbmc/+/81059
 git fetch https://gerrit.openbmc.org/openbmc/openbmc refs/changes/59/81059/12 && git cherry-pick FETCH_HEAD
+```
 
-//before build
+## Update python, Cause Ubuntu 20.04 is Python 2.7.18
+```				
 加入 deadsnakes PPA					
 sudo apt update					
 sudo apt install software-properties-common -y					
 sudo add-apt-repository ppa:deadsnakes/ppa					
-sudo apt update					
+sudo apt update
+```					
 					
-安裝你要的 Python 版本（例如 3.11）：					
-sudo apt install python3.11 python3.11-venv python3.11-dev -y					
+**Setup specific Python version（e.g. 3.11）：**
+```					
+sudo apt install python3.11 python3.11-venv python3.11-dev -y
+```					
 					
-建立虛擬環境，並在其中執行 devrool / bitbake					
-python3.11 -m venv /home/callan/data2/ventura/python3.11   <== first time					
-source /home/callan/data2/ventura/python3.11/bin/activate     <== always use					
-python --version  # 確認是 3.11
-
-//build
+**Create python virtual environment for run devtool / bitbake**
+```					
+python3.11 -m venv /home/callan/data2/ventura/python3.11   <== only in first time					
+source /home/callan/data2/ventura/python3.11/bin/activate  <== frequently used
+```
+```					
+python --version  #check version	
+```
+---
+**Build**
+```
 source /home/callan/data2/ventura/python3.11/bin/activate
 source setup evb-ast2700
 bitbake obmc-phosphor-image
+```
