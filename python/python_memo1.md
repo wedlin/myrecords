@@ -1,13 +1,13 @@
 ## Update python, Cause Ubuntu 20.04 is Python 2.7.18
 ```				
-¥[¤J deadsnakes PPA					
+Add deadsnakes PPA					
 sudo apt update					
 sudo apt install software-properties-common -y					
 sudo add-apt-repository ppa:deadsnakes/ppa					
 sudo apt update
 ```					
 					
-**Setup specific Python version¡]e.g. 3.11¡^¡G**
+**Setup specific Python version (e.g. 3.11)**
 ```					
 sudo apt install python3.11 python3.11-venv python3.11-dev -y
 ```					
