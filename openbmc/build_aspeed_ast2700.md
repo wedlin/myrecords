@@ -1,10 +1,11 @@
 # Record of Aspeed Ast2700 in OpenBMC
 
-* Prerequisite
-  Ubuntu 20.04.6 LTS
-  incremental memory swap file for physical memory
-  Patch libgcrypt  
+- Prerequisite
+  - Ubuntu 20.04.6 LTS
+  - incremental memory swap file for physical memory
+  - Patch libgcrypt  
   
+- [libgcrypt patch](https://github.com/wedlin/myrecords/blob/main/bitbake/bitbake_patch.md)   
 - [add swap file](https://github.com/wedlin/myrecords/blob/main/Ubuntu/swapmemory.md)
 - [python update](https://github.com/wedlin/myrecords/blob/main/python/python_memo1.md)
 ---
