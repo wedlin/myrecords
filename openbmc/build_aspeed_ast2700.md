@@ -19,18 +19,20 @@
 > cd ./aspeed_ob_v09.07
   source setup ast2700-default
 
-*Build Aspeed openbmc*
+**Build Aspeed openbmc**
 > bitbake obmc-phosphor-image
 
 **Patch libgcrypt (if need)**
+- [libgcrypt patch](https://github.com/wedlin/myrecords/blob/main/bitbake/bitbake_patch.md)
 ```
 Workground:
 ./test/Makefile 
 
 t-thread-local$(EXEEXT): $(t_thread_local_OBJECTS) $(t_thread_local_DEPENDENCIES) $(EXTRA_t_thread_local_DEPENDENCIES)
         @rm -f t-thread-local$(EXEEXT)
-        $(AM_V_CCLD)$(LINK) $(t_thread_local_OBJECTS) $(t_thread_local_LDADD) $(LIBS) -lpthread
+        $(AM_V_CCLD)$(LINK) $(t_thread_local_OBJECTS) $(t_thread_local_LDADD) $(LIBS) -lpthread        
 ```
+---
 **Run in QEMU**
 Methon 1:
 >runqemu slirp serialstdio
