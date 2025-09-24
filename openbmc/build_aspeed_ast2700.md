@@ -30,9 +30,6 @@ Workground:
 t-thread-local$(EXEEXT): $(t_thread_local_OBJECTS) $(t_thread_local_DEPENDENCIES) $(EXTRA_t_thread_local_DEPENDENCIES)
         @rm -f t-thread-local$(EXEEXT)
         $(AM_V_CCLD)$(LINK) $(t_thread_local_OBJECTS) $(t_thread_local_LDADD) $(LIBS) -lpthread
-
-
-
 ```
 **Run in QEMU**
 Methon 1:
