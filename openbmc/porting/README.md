@@ -1,17 +1,17 @@
-ï»¿# OpenBMC Development Structure Demo
+ï»? OpenBMC Development Structure Demo
 
 ## 1ï¸âƒ£ Directory Structure
 ```
-igsobmc/                   â† Main repository
-â”œâ”€â”€ openbmc_ast2700/       â† OpenBMC + AST2700 patch
-â”œâ”€â”€ openbmc-upstream/      â† Upstream OpenBMC
-â”œâ”€â”€ igs_ob_mid/            â† Middleware layer
-â”‚   â”œâ”€â”€ meta-igs-ast2700/  â† AST2700 BSP extension layer (e.g., AST2700 patch)
-â”‚   â””â”€â”€ meta-igs-common/   â† Common layer (e.g., libgcrypt patch)
-â””â”€â”€ igs_ob_prj/            â† Project-specific layer
-    â”œâ”€â”€ meta-igs-prjA/     â† Project A layer (emulate to use AST2700 patch of middleware)
-    â”œâ”€â”€ meta-igs-prjB/     â† Project B layer (emulate to use OpenBMC build-in AST2700 support)
-    â””â”€â”€ setup/             â† Build setup scripts
+igsobmc/                   ??Main repository
+?œâ??€ openbmc_ast2700/       ??OpenBMC + AST2700 patch
+?œâ??€ openbmc-upstream/      ??Upstream OpenBMC
+?œâ??€ igs_ob_mid/            ??Middleware layer
+??  ?œâ??€ meta-igs-ast2700/  ??AST2700 BSP extension layer (e.g., AST2700 patch)
+??  ?”â??€ meta-igs-common/   ??Common layer (e.g., libgcrypt patch)
+?”â??€ igs_ob_prj/            ??Project-specific layer
+    ?œâ??€ meta-igs-prjA/     ??Project A layer (emulate to use AST2700 patch of middleware)
+    ?œâ??€ meta-igs-prjB/     ??Project B layer (emulate to use OpenBMC build-in AST2700 support)
+    ?”â??€ setup/             ??Build setup scripts
 ```
 
 ---
@@ -154,7 +154,7 @@ git branch -M main
 git push -u origin main
 ```
 
-### Setup 6: change URL of .gitmodule in superproject ()`igsobmc`)
+### Setup 6: change URL of .gitmodule in superproject (`igsobmc`)
 ```bash
 .gitmodules` is a text configuration file,
 located in the root directory of the superproject (main project), used to record information about all submodules.
@@ -260,7 +260,7 @@ Run:
 ```bash
 git rm -r --cached sstate-cache tmp tmp-bootmcu
 ```
-> `--cached` removes the directories from Gitâ€™s index only (it wonâ€™t delete local files if they still exist).
+> `--cached` removes the directories from Git?™s index only (it won?™t delete local files if they still exist).
 
 Then verify:
 ```bash
@@ -295,14 +295,12 @@ git push
 ---
 
 ### 6. Update the Submodule in the Main Repository
-follow this porcedureï¼š
-```bash
+follow this porcedureï¼?```bash
 cd openbmc-upstream        # into submodule
 git checkout master        # switch to master (One-time instruction)
 git pull origin master     # update to latest
 ```
-after make sureï¼š
-```bash
+after make sureï¼?```bash
 cd ../igsobmc
 git add openbmc-upstream
 git commit -sm "Update submodule openbmc-upstream to latest master"
@@ -311,7 +309,7 @@ git push
 
 ---
 
-### âœ… Result
+### ??Result
 The main repository now points to the **latest commit** of the submodule. Other developers who pull updates will automatically receive the submodule changes, including the removal of build cache directories.
 
 
