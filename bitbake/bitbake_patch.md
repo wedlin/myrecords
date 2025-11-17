@@ -19,9 +19,11 @@ testdrv_LDADD = $(LDADD_FOR_TESTS_KLUDGE)
 t_thread_local_LDADD = $(LDADD) -lpthread <== add this
 ```
 ### Create path file
->git add tests/Makefile.am
+```bash
+git add tests/Makefile.am
 git commit -m "add t_thread_local_LDADD in Makefile.am"
 git format-patch HEAD^
+```
 ### Add upstream status
 ```
 vi 0001-add-t_thread_local_LDADD-in-Makefile.am.patch
