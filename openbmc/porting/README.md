@@ -128,8 +128,8 @@ git push -u origin main
 ```bash
 cd igsobmc
 git clone https://github.com/openbmc/openbmc.git ./openbmc-upstream
-cd openbmc-upstream
 below is for reference not need:
+//cd openbmc-upstream
 //git remote add gitlab https://172.16.53.179/openbmc_group/openbmc-upstream.git
 //git fetch origin
 //git push --all gitlab
