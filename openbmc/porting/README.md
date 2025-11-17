@@ -1,17 +1,17 @@
-﻿�? OpenBMC Development Structure Demo
+﻿# OpenBMC Development Structure Demo
 
 ## 1️⃣ Directory Structure
 ```
-igsobmc/                   ??Main repository
-?��??� openbmc_ast2700/       ??OpenBMC + AST2700 patch
-?��??� openbmc-upstream/      ??Upstream OpenBMC
-?��??� igs_ob_mid/            ??Middleware layer
-??  ?��??� meta-igs-ast2700/  ??AST2700 BSP extension layer (e.g., AST2700 patch)
-??  ?��??� meta-igs-common/   ??Common layer (e.g., libgcrypt patch)
-?��??� igs_ob_prj/            ??Project-specific layer
-    ?��??� meta-igs-prjA/     ??Project A layer (emulate to use AST2700 patch of middleware)
-    ?��??� meta-igs-prjB/     ??Project B layer (emulate to use OpenBMC build-in AST2700 support)
-    ?��??� setup/             ??Build setup scripts
+igsobmc/                   ← Main repository
+├── openbmc_ast2700/       ← OpenBMC + AST2700 patch
+├── openbmc-upstream/      ← Upstream OpenBMC
+├── igs_ob_mid/            ← Middleware layer
+│   ├── meta-igs-ast2700/  ← AST2700 BSP extension layer (e.g., AST2700 patch)
+│   └── meta-igs-common/   ← Common layer (e.g., libgcrypt patch)
+└── igs_ob_prj/            ← Project-specific layer
+    ├── meta-igs-prjA/     ← Project A layer (emulate to use AST2700 patch of middleware)
+    ├── meta-igs-prjB/     ← Project B layer (emulate to use OpenBMC build-in AST2700 support)
+    └── setup/             ← Build setup scripts
 ```
 
 ---
@@ -260,7 +260,7 @@ Run:
 ```bash
 git rm -r --cached sstate-cache tmp tmp-bootmcu
 ```
-> `--cached` removes the directories from Git?�s index only (it won?�t delete local files if they still exist).
+> `--cached` removes the directories from Git’s index only (it won’t delete local files if they still exist).
 
 Then verify:
 ```bash
@@ -295,21 +295,39 @@ git push
 ---
 
 ### 6. Update the Submodule in the Main Repository
-follow this porcedure�?```bash
+follow this porcedure：
+```bash
 cd openbmc-upstream        # into submodule
 git checkout master        # switch to master (One-time instruction)
 git pull origin master     # update to latest
 ```
-after make sure�?```bash
+after make sure：
+```bash
 cd ../igsobmc
 git add openbmc-upstream
-git commit -sm "Update submodule openbmc-upstream to latest master"
+git commit -m "Update submodule openbmc-upstream to latest master"
 git push                    
 ```
 
 ---
 
-### ??Result
+### ✅ Result
 The main repository now points to the **latest commit** of the submodule. Other developers who pull updates will automatically receive the submodule changes, including the removal of build cache directories.
 
+---
 
+### Boot success
+
+>cat /etc/os-release
+ID=openbmc-phosphor
+NAME="Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro)"
+VERSION="igsast2700b-demo"
+VERSION_ID=igsast2700b-demo
+VERSION_CODENAME="styhead"
+PRETTY_NAME="Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) igsast2700b-demo"
+CPE_NAME="cpe:/o:openembedded:openbmc-phosphor:igsast2700b-demo"
+BUILD_ID="20251014114612"
+OPENBMC_TARGET_MACHINE="igs-evb-ast2700b"
+EXTENDED_VERSION="None"
+
+---
