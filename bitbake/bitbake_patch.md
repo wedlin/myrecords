@@ -1,6 +1,6 @@
 # Libgcrypt compile issue
 ## 1. Create file structure
-```
+```bash
 create directory in your layer: (e.g. aspeed openbmc - meta-aspeed-sdk/meta-ast2700-sdk)
 
 cd meta-aspeed-sdk/meta-ast2700-sdk
@@ -9,7 +9,7 @@ mkdir -p recipes-support/libgcrypt/files
 ---
 ## 2. How to patch
 ### Get source code
-```
+```bash
 devtool libgcrypt 
 cd \$TOPDIR/workspace/source/
 e.g. cd ~/data2/sony/aspeed_openbmc/build/ast2700-default/workspace/sources/libgcrypt
@@ -25,7 +25,7 @@ git commit -m "add t_thread_local_LDADD in Makefile.am"
 git format-patch HEAD^
 ```
 ### Add upstream status
-```
+```bash
 vi 0001-add-t_thread_local_LDADD-in-Makefile.am.patch
 From ec7448d56368d692fe1ec7680fb0c749ec55cf55 Mon Sep 17 00:00:00 2001
 From: wedlin <wedlin@ingrasys.com>
@@ -53,16 +53,17 @@ index 9a9e1c2..2880bdb 100644
  endif
 ```
 ### Copy patch to file structure of recipe
-```
+```bash
 cp 0001-add-t_thread_local_LDADD-in-Makefile.am.patch /home/callan/data2/sony/aspeed_openbmc/meta-aspeed-sdk/meta-ast2700-sdk/recipes-support/libgcrypt/files
 ```
 ---
 ### delete the source code
->devtool reset libgcrypt
- 
+```bash
+devtool reset libgcrypt
+```
 ---
 ## 3. Create Recipe
-```
+```bash
 reference recipe in openbmc (e.g. poky/meta/recipes-support/libgcrypt/libgcrypt_1.11.1.bb
 
 cd ..
@@ -87,22 +88,28 @@ do_patch:append() {
 ```
 ---
 ## 4. clean and rebuild libgcrypt
->bitbake -c cleanall libgcrypt
+```bash
+bitbake -c cleanall libgcrypt
 //bitbake -c cleansstate libgcrypt
 bitbake libgcrypt
+```
 ---
 ## 5. additional information about
 ### Check source and build path 
->bitbake -e libgcrypt | grep -i ^S=
+```bash
+bitbake -e libgcrypt | grep -i ^S=
 S="/home/callan/data2/sony/aspeed_openbmc/build/ast2700-default/tmp/work/cortexa35-openbmc-linux/libgcrypt/1.11.1/libgcrypt-1.11.1"
-
->bitbake -e libgcrypt | grep -i ^B=
+```
+```bash
+bitbake -e libgcrypt | grep -i ^B=
 B="/home/callan/data2/sony/aspeed_openbmc/build/ast2700-default/tmp/work/cortexa35-openbmc-linux/libgcrypt/1.11.1/build"
-
+```
 ### Check append recipe
->bitbake-layers show-appends libgcrypt
+```bash
+bitbake-layers show-appends libgcrypt
 === Matched appended recipes ===
 libgcrypt_1.11.1.bb:
   /home/callan/data2/sony/aspeed_openbmc/meta-aspeed-sdk/meta-ast2700-sdk/recipes-support/libgcrypt/libgcrypt_1.11.1.bbappend
+```
 ---
 **This way, the patch will be automatically applied during Yocto build, and t-thread-local will reference t_thread_local_LDADD with -lpthread, provide automatically modify the Makefile.**
