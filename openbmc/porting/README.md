@@ -1,17 +1,17 @@
-ï»? OpenBMC Development Structure Demo
+ï»¿ï¿½? OpenBMC Development Structure Demo
 
 ## 1ï¸âƒ£ Directory Structure
 ```
 igsobmc/                   ??Main repository
-?œâ??€ openbmc_ast2700/       ??OpenBMC + AST2700 patch
-?œâ??€ openbmc-upstream/      ??Upstream OpenBMC
-?œâ??€ igs_ob_mid/            ??Middleware layer
-??  ?œâ??€ meta-igs-ast2700/  ??AST2700 BSP extension layer (e.g., AST2700 patch)
-??  ?”â??€ meta-igs-common/   ??Common layer (e.g., libgcrypt patch)
-?”â??€ igs_ob_prj/            ??Project-specific layer
-    ?œâ??€ meta-igs-prjA/     ??Project A layer (emulate to use AST2700 patch of middleware)
-    ?œâ??€ meta-igs-prjB/     ??Project B layer (emulate to use OpenBMC build-in AST2700 support)
-    ?”â??€ setup/             ??Build setup scripts
+?ï¿½ï¿½??ï¿½ openbmc_ast2700/       ??OpenBMC + AST2700 patch
+?ï¿½ï¿½??ï¿½ openbmc-upstream/      ??Upstream OpenBMC
+?ï¿½ï¿½??ï¿½ igs_ob_mid/            ??Middleware layer
+??  ?ï¿½ï¿½??ï¿½ meta-igs-ast2700/  ??AST2700 BSP extension layer (e.g., AST2700 patch)
+??  ?ï¿½ï¿½??ï¿½ meta-igs-common/   ??Common layer (e.g., libgcrypt patch)
+?ï¿½ï¿½??ï¿½ igs_ob_prj/            ??Project-specific layer
+    ?ï¿½ï¿½??ï¿½ meta-igs-prjA/     ??Project A layer (emulate to use AST2700 patch of middleware)
+    ?ï¿½ï¿½??ï¿½ meta-igs-prjB/     ??Project B layer (emulate to use OpenBMC build-in AST2700 support)
+    ?ï¿½ï¿½??ï¿½ setup/             ??Build setup scripts
 ```
 
 ---
@@ -260,7 +260,7 @@ Run:
 ```bash
 git rm -r --cached sstate-cache tmp tmp-bootmcu
 ```
-> `--cached` removes the directories from Git?™s index only (it won?™t delete local files if they still exist).
+> `--cached` removes the directories from Git?ï¿½s index only (it won?ï¿½t delete local files if they still exist).
 
 Then verify:
 ```bash
@@ -295,12 +295,12 @@ git push
 ---
 
 ### 6. Update the Submodule in the Main Repository
-follow this porcedureï¼?```bash
+follow this porcedureï¿½?```bash
 cd openbmc-upstream        # into submodule
 git checkout master        # switch to master (One-time instruction)
 git pull origin master     # update to latest
 ```
-after make sureï¼?```bash
+after make sureï¿½?```bash
 cd ../igsobmc
 git add openbmc-upstream
 git commit -sm "Update submodule openbmc-upstream to latest master"
