@@ -40,23 +40,29 @@ bitbake -c fetch libgcrypt
 >bitbake -c unpack libgcrypt
 ```
 ---
-### BitBake skip task mechanism
-```bash
-BitBake 每個任務（task，e.g. do_fetch, do_unpack, do_patch, do_configure 等）every taks have stamp file，Used to record whether this task has been successfully executed：
-The path is usually:
-  ${TOPDIR}=/home/callan/data2/sony/aspeed_openbmc
-  ${TOPDIR}/build/${MACHINE}/tmp/stamps/${TARGET_SYS}/${PN}
-  /home/callan/data2/sony/aspeed_openbmc/build/ast2700-default/tmp/stamps/cortexa35-openbmc-linux/libgcrypt
-If the stamp exists and the task is considered up-to-date, it will be skipped. This means that if you've already successfully unpacked the file, BitBake will assume it doesn't need to do it again.
-```
----
 ### Watch multiple parameter
 ```bash
+bitbake -e libgcrypt | grep -iE '^(MACHINE|PN|PV|MULTIMACH_TARGET_SYS)='
+or
 bitbake -e libgcrypt | egrep '^(MACHINE|PN|PV|MULTIMACH_TARGET_SYS)='
 MACHINE="ast2700-default"
 MULTIMACH_TARGET_SYS="cortexa35-openbmc-linux"
 PN="libgcrypt"
 PV="1.11.1"
+```
+---
+### BitBake skip task mechanism
+```bash
+BitBake every task(task，e.g. do_fetch, do_unpack, do_patch, do_configure etc...）
+every taks have stamp file，Used to record whether this task has been successfully executed：
+The path is usually:
+  ${TOPDIR}=/home/callan/data2/sony/aspeed_openbmc
+  ${TOPDIR}/build/${MACHINE}/tmp/stamps/${MULTIMACH_TARGET_SYS}/${PN}
+  /home/callan/data2/sony/aspeed_openbmc/build/ast2700-default/tmp/stamps/cortexa35-openbmc-linux/libgcrypt
+If the stamp exists and the task is considered up-to-date, 
+it will be skipped. 
+This means that if you've already successfully unpacked the file, 
+BitBake will assume it doesn't need to do it again.
 ```
 ---
 ### list bitbake task
