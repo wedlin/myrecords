@@ -1,5 +1,5 @@
 ### bitbake debug
-```
+```bash
 quick debug：echo
 formal debug：bbwarn / bbplain
 parameter tracking：bitbake -e
@@ -32,14 +32,16 @@ dislapy as follow :
 ```
 ---
 ### force(-f) do patch libgcrypt and show debug(-v)
-> bitbake libgcrypt -c patch -f -v 
+```bash
+bitbake libgcrypt -c patch -f -v 
 **download source**
 bitbake -c fetch libgcrypt
 **unpack source**
 >bitbake -c unpack libgcrypt
+```
 ---
 ### BitBake skip task mechanism
-```
+```bash
 BitBake 每個任務（task，e.g. do_fetch, do_unpack, do_patch, do_configure 等）every taks have stamp file，Used to record whether this task has been successfully executed：
 The path is usually:
   ${TOPDIR}=/home/callan/data2/sony/aspeed_openbmc
@@ -49,14 +51,16 @@ If the stamp exists and the task is considered up-to-date, it will be skipped. T
 ```
 ---
 ### Watch multiple parameter
-> bitbake -e libgcrypt | egrep '^(MACHINE|PN|PV|MULTIMACH_TARGET_SYS)='
+```bash
+bitbake -e libgcrypt | egrep '^(MACHINE|PN|PV|MULTIMACH_TARGET_SYS)='
 MACHINE="ast2700-default"
 MULTIMACH_TARGET_SYS="cortexa35-openbmc-linux"
 PN="libgcrypt"
 PV="1.11.1"
+```
 ---
 ### list bitbake task
-```
+```bash
 bitbake -c listtasks libgcrypt
 
 do_build                              Default task for a recipe - depends on all other normal tasks required to 'build' a recipe
